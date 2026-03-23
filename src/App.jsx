@@ -14,7 +14,7 @@ function App() {
 
   const [profilePhoto, setProfilePhoto] = useState(() => {
     const savedPhoto = localStorage.getItem('portfolio-photo')
-    return savedPhoto || '/ravi-photo.jpg'
+    return savedPhoto || '/ravi.jpeg'
   })
 
   useEffect(() => {
