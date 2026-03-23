@@ -12,10 +12,8 @@ function App() {
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
   })
 
-  const [profilePhoto, setProfilePhoto] = useState(() => {
-    const savedPhoto = localStorage.getItem('portfolio-photo')
-    return savedPhoto || '/ravi.jpeg'
-  })
+//set profile photo url from the public folder
+  const profilePhotoUrl = 'ravi.jpeg';
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
@@ -23,23 +21,23 @@ function App() {
   }, [theme])
 
   useEffect(() => {
-    localStorage.setItem('portfolio-photo', profilePhoto)
-  }, [profilePhoto])
+    localStorage.setItem('portfolio-photo', profilePhotoUrl)
+  }, [profilePhotoUrl])
 
-  const handlePhotoUpload = (event) => {
-    const file = event.target.files?.[0]
-    if (!file) {
-      return
-    }
+  // const handlePhotoUpload = (event) => {
+  //   const file = event.target.files?.[0]
+  //   if (!file) {
+  //     return
+  //   }
 
-    const reader = new FileReader()
-    reader.onload = () => {
-      if (typeof reader.result === 'string') {
-        setProfilePhoto(reader.result)
-      }
-    }
-    reader.readAsDataURL(file)
-  }
+  //   const reader = new FileReader()
+  //   reader.onload = () => {
+  //     if (typeof reader.result === 'string') {
+  //       setProfilePhoto(reader.result)
+  //     }
+  //   }
+  //   reader.readAsDataURL(file)
+  // }
 
   const skillGroups = [
     {
@@ -138,12 +136,12 @@ function App() {
           <label className="photo-upload" htmlFor="photo-upload-input">
             📷 Upload Photo
           </label>
-          <input
+          {/* <input
             id="photo-upload-input"
             type="file"
             accept="image/*"
             onChange={handlePhotoUpload}
-          />
+          /> */}
 
           <button
             className="theme-toggle"
@@ -158,11 +156,11 @@ function App() {
         <figure className="profile-photo-wrap">
           <img
             className="profile-photo"
-            src={profilePhoto}
+            src={profilePhotoUrl}
             alt="Ravi Singh"
             onError={(event) => {
               event.currentTarget.src = fallbackPhoto
-              setProfilePhoto(fallbackPhoto)
+              // setProfilePhoto(fallbackPhoto)
             }}
           />
         </figure>
